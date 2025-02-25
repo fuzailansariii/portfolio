@@ -17,11 +17,8 @@ export default function Navbar() {
   return (
     <div className="navbar flex justify-between items-center bg-base-100 z-50 px-5 md:px-10">
       {/* Left side menu items */}
-      <div className="navbar-start flex items-center w-auto">
-        <Link
-          href={"/"}
-          className="text-2xl font-bold flex items-center space-x-4"
-        >
+      <div className="navbar-start flex items-center w-auto gap-4">
+        <Link href={"/"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -36,14 +33,15 @@ export default function Navbar() {
               d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
             />
           </svg>
-          <p className="flex items-center gap-4">
-            Fuzail <span className="font-thin text-xl"> Developer</span>
-          </p>
-        </Link>{" "}
+        </Link>
+        <Link href={"/"} className="text-2xl font-bold flex items-center">
+          Fuzail
+        </Link>
+        <span className="font-thin text-xl"> Developer</span>
       </div>
 
       {/* Right side menu items */}
-      <div className="hidden lg:flex">
+      <div className="hidden lg:flex w-auto">
         {MenuItems.map((menu, index) => (
           <ul key={index} className="menu menu-horizontal px-1">
             <li>
