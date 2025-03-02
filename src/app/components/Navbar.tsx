@@ -1,8 +1,9 @@
 "use client";
 import { MenuItems } from "@/lib/NavbarData";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import MobileMenu from "./MobileMenu";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -10,9 +11,18 @@ export default function Navbar() {
   const openModal = () => {
     modalRef.current?.showModal();
   };
-  // const closeModal = () => {
-  //   modalRef.current?.close();
-  // };
+
+  const closeModal = () => {
+    if (modalRef.current?.open) {
+      modalRef.current?.close();
+    }
+  };
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    closeModal();
+  }, [pathname]);
 
   return (
     <div className="navbar flex justify-between items-center bg-base-100 z-50 px-5 md:px-10">
@@ -72,13 +82,16 @@ export default function Navbar() {
 
       {/* Mobile menu popup */}
       <div className="md:hidden">
-        <dialog ref={modalRef} className="modal">
+        <dialog
+          ref={modalRef}
+          className="modal"
+          onClick={(e) => {
+            if (e.target === modalRef.current) closeModal();
+          }}
+        >
           <div className="modal-box h-[50%] rounded-2xl">
             <MobileMenu />
           </div>
-          <form method="dialog" className="modal-backdrop">
-            <button>close</button>
-          </form>
         </dialog>
       </div>
     </div>
