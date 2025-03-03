@@ -20,23 +20,23 @@ export default function ResumeItems({ heading }: ResumeItemsProp) {
         <ResumeTemplate
           year="2021"
           title="B.Tech"
-          description=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sapiente
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sapiente
       expedita pariatur laborum! Expedita sunt quae quia similique, iusto
       reiciendis enim, voluptatem perferendis accusantium quo, possimus corrupti
       impedit quos sed?"
         />
         <ResumeTemplate
-          year="2021"
-          title="B.Tech"
-          description=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sapiente
+          year="2015"
+          title="Intermediate"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sapiente
       expedita pariatur laborum! Expedita sunt quae quia similique, iusto
       reiciendis enim, voluptatem perferendis accusantium quo, possimus corrupti
       impedit quos sed?"
         />
         <ResumeTemplate
-          year="2021"
-          title="B.Tech"
-          description=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sapiente
+          year="2013"
+          title="High School"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sapiente
       expedita pariatur laborum! Expedita sunt quae quia similique, iusto
       reiciendis enim, voluptatem perferendis accusantium quo, possimus corrupti
       impedit quos sed?"
