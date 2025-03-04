@@ -35,7 +35,7 @@ export default function Contact() {
                 {...register("firstname")}
                 type="text"
                 placeholder="First Name"
-                className="input input-primary w-full"
+                className="input input-primary w-full rounded-lg"
               />
               {errors.firstname && (
                 <p className="text-red-500 text-sm">
@@ -49,7 +49,7 @@ export default function Contact() {
                 {...register("lastname")}
                 type="text"
                 placeholder="Last Name"
-                className="input input-primary w-full"
+                className="input input-primary w-full rounded-lg"
               />
               {errors.lastname && (
                 <p className="text-red-500 text-sm">
@@ -57,36 +57,35 @@ export default function Contact() {
                 </p>
               )}
             </div>
+          </div>
+          <div>
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="Email"
+              className="input input-primary w-full rounded-lg"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
 
-            <div>
-              <input
-                {...register("email")}
-                type="email"
-                placeholder="Email"
-                className="input input-primary w-full"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register("subject")}
-                type="text"
-                placeholder="Subject"
-                className="input input-primary w-full"
-              />
-              {errors.subject && (
-                <p className="text-red-500 text-sm">{errors.subject.message}</p>
-              )}
-            </div>
+          <div>
+            <input
+              {...register("subject")}
+              type="text"
+              placeholder="Subject"
+              className="input input-primary w-full rounded-lg"
+            />
+            {errors.subject && (
+              <p className="text-red-500 text-sm">{errors.subject.message}</p>
+            )}
           </div>
 
           <div>
             <textarea
               {...register("message")}
-              className="textarea w-full input-primary"
+              className="textarea w-full input-primary rounded-lg"
               placeholder="Type your message here"
             />
             {errors.message && (
