@@ -27,18 +27,27 @@ export const authOptions: NextAuthOptions = {
             },
           });
 
-          if (user && (await bcrypt.compare(password, user.password))) {
-            return {
-              id: user.id,
-              email: user.email,
-              role: user.role,
-              fullName: user.fullName,
-            };
+          if (!user) {
+            throw new Error("Incorrect Email");
           }
-          return null;
+
+          const isPasswordCorrect = await bcrypt.compare(
+            password,
+            user.password
+          );
+
+          if (!isPasswordCorrect) {
+            throw new Error("Incorrect Password");
+          }
+
+          return {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+            fullName: user.fullName,
+          };
         } catch (error) {
-          console.error("Error during authentication:", error);
-          throw new Error("Login failed. Please try again.");
+          throw error;
         }
       },
     }),
