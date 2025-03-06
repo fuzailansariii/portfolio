@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -24,7 +25,7 @@ export default function Projects({
     <div className="w-[380px] h-[420px] shadow-md rounded-lg overflow-hidden border-gray-300 flex flex-col">
       {/* Project Image */}
       <div className="w-full h-[200px] overflow-hidden">
-        <img
+        <Image
           src={projectImage}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"

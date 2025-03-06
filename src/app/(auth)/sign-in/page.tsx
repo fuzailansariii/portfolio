@@ -53,9 +53,9 @@ export default function SignIn() {
         router.push("/");
         reset();
       }
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Something went wrong");
-      console.error(error.message);
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }

@@ -34,7 +34,7 @@ export default function SignUp() {
         router.push("/sign-in");
         reset();
       }
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.status === 409) {
           toast.error("User already exist with this email");
@@ -46,7 +46,7 @@ export default function SignUp() {
       } else {
         toast.error("Something went wrong");
       }
-      console.error(error.message);
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }
