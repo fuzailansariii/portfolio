@@ -1,5 +1,8 @@
 import Projects from "@/app/components/Projects";
 import React from "react";
+// import DevJourney from "@/assets/DevJourney.png";
+// import LinkedInUIClone from "@/assets/LinkedInUIClone.png";
+// import MyKitchenImage from "@/assets/MyKitchenImage.png";
 
 const projectData = [
   {
@@ -8,8 +11,7 @@ const projectData = [
       "A portfolio site crafted with Next.js and TailwindCSS.A portfolio site crafted with Next.js and TailwindCSS.A portfolio site crafted with Next.js and TailwindCSS.A portfolio site crafted with Next.js and TailwindCSS.",
     githubLink: "https://github.com/fuzailansariii/dev-journey",
     liveLink: "https://dev-journey-three.vercel.app",
-    projectImage:
-      "https://github.com/fuzailansariii/dev-journey/blob/main/src/assets/DevJourney.png?raw=true",
+    projectImage: "/assets/DevJourney.png",
   },
   {
     title: "LinkedIn UI Clone",
@@ -17,8 +19,7 @@ const projectData = [
       "A functional clone of the LinkedIn interface with features such as login, signup, posting, and profile management. Built using ReactJS, TailwindCSS, and Firebase",
     githubLink: "https://github.com/fuzailansariii/linkedin-clone",
     liveLink: "https://linkedin-clone-beryl-five.vercel.app/",
-    projectImage:
-      "https://github.com/fuzailansariii/dev-journey/blob/main/src/assets/LinkedInUIClone.png?raw=true",
+    projectImage: "/assets/LinkedInUIClone.png",
   },
   {
     title: "My Kitchen Recipes",
@@ -26,8 +27,7 @@ const projectData = [
       "Discover a variety of delicious recipes from around the world. Easily search by ingredients or dietary preferences. Perfect for all cooking levels, from beginners to experts",
     githubLink: "https://github.com/fuzailansariii/MyKitchenRecipes",
     liveLink: "https://my-kitchen-recipes.vercel.app/",
-    projectImage:
-      "https://github.com/fuzailansariii/dev-journey/blob/main/src/assets/MyKitchenImage.png?raw=true",
+    projectImage: "/assets/MyKitchenImage.png",
   },
 
   // Add more projects here

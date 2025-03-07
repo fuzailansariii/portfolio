@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import MobileMenu from "./MobileMenu";
 import { usePathname } from "next/navigation";
+import DashboardNav from "./DashboardNav";
 
 export default function Navbar() {
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -59,6 +60,7 @@ export default function Navbar() {
             </li>
           </ul>
         ))}
+        <DashboardNav />
       </div>
 
       <div className="navbar-end lg:hidden items-center">

@@ -53,6 +53,8 @@ export default function HeroSection() {
       {/* Left: Image */}
       <div className="w-60 h-60 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-lg">
         <Image
+          width={300}
+          height={300}
           src={HeroImage.src}
           alt="Hero Avatar"
           className="w-full h-full object-cover"

@@ -26,6 +26,8 @@ export default function Projects({
       {/* Project Image */}
       <div className="w-full h-[200px] overflow-hidden">
         <Image
+          height={420}
+          width={380}
           src={projectImage}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
