@@ -19,4 +19,12 @@ const ContactModal = z.object({
   message: z.string().min(20, "Message must be at least of 20 characters"),
 });
 
-export { SignInModel, SignUpModel, ContactModal };
+const ProjectModel = z.object({
+  title: z.string().min(5, "Title must be at least 5 character"),
+  description: z.string().min(20, "Title must be at least 20 character"),
+  imageUrl: z.string().url("Invalid url").optional(),
+  githubUrl: z.string().url("Invalid url").optional(),
+  liveUrl: z.string().url("Invalid url").optional(),
+});
+
+export { SignInModel, SignUpModel, ContactModal, ProjectModel };
