@@ -26,7 +26,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <div className="navbar flex justify-between items-center bg-base-100 z-50 px-5 md:px-10">
+    <div className="navbar flex justify-between items-center z-50 px-5 md:px-10 bg-base-200">
       {/* Left side menu items */}
       <div className="navbar-start flex items-center w-auto gap-4">
         <Link href={"/"}>
@@ -52,7 +52,7 @@ export default function Navbar() {
       </div>
 
       {/* Right side menu items */}
-      <div className="hidden lg:flex w-auto">
+      <div className="hidden lg:flex w-auto gap-2">
         {MenuItems.map((menu, index) => (
           <ul key={index} className="menu menu-horizontal px-1">
             <li>
@@ -91,7 +91,7 @@ export default function Navbar() {
             if (e.target === modalRef.current) closeModal();
           }}
         >
-          <div className="modal-box h-[50%] rounded-2xl">
+          <div className="modal-box h-[50%] rounded-2xl bg-base-200">
             <MobileMenu />
           </div>
         </dialog>
