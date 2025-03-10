@@ -1,6 +1,6 @@
 "use client";
 
-import { MenuItems } from "@/lib/NavbarData";
+import { AuthItems, MenuItems } from "@/lib/NavbarData";
 import Link from "next/link";
 import React from "react";
 import MobileDashboardNav from "./MobileDashboardNav";
@@ -12,7 +12,20 @@ export default function MobileMenu() {
   return (
     <div className="flex flex-col items-center justify-center gap-10 h-full rounded-lg">
       <div>
-        <MobileDashboardNav session={session} isAdmin={isAdmin} />
+        {session ? (
+          <MobileDashboardNav session={session} isAdmin={isAdmin} />
+        ) : (
+          <div className="text-center space-x-3">
+            {AuthItems.map((menu, index) => (
+              <button
+                key={index}
+                className="btn btn-outline rounded-lg text-xl text-cyan-400 hover:text-cyan-300"
+              >
+                <Link href={menu.link}>{menu.title}</Link>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="space-y-4 text-center">
         {MenuItems.map((menu, index) => (

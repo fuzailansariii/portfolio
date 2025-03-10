@@ -1,4 +1,5 @@
 "use client";
+import InputField from "@/app/components/InputField";
 import { ProjectModel } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -10,21 +11,18 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 export default function AddProject() {
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const router = useRouter();
   const {
     handleSubmit,
     register,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<z.infer<typeof ProjectModel>>({
     resolver: zodResolver(ProjectModel),
   });
   const onSubmit = async (data: z.infer<typeof ProjectModel>) => {
     try {
-      setIsSubmitting(true);
       const response = await axios.post("/api/upload-projects", data);
-      //   console.log(response);
       if (response.status === 201) {
         toast.success("Project added successfully");
         reset();
@@ -36,8 +34,6 @@ export default function AddProject() {
       } else {
         toast.error("Something went wrong");
       }
-    } finally {
-      setIsSubmitting(false);
     }
   };
   return (
@@ -46,71 +42,51 @@ export default function AddProject() {
         <div className="md:max-w-[500px] w-full">
           <form onSubmit={handleSubmit(onSubmit)}>
             <fieldset disabled={isSubmitting} className="space-y-5 px-5">
-              <input
-                {...register("title")}
+              <InputField
+                register={register("title")}
                 type="text"
-                placeholder="Project Title"
-                className="input input-primary w-full rounded-lg"
+                label="Project Title"
+                error={errors.title}
               />
-              {errors.title && (
-                <p className="text-red-500 text-sm">{errors.title.message}</p>
-              )}
-              <input
-                {...register("description")}
+
+              <InputField
+                register={register("description")}
                 type="text"
-                placeholder="Description"
-                className="input input-primary w-full rounded-lg"
+                label="Description"
+                error={errors.description}
               />
-              {errors.description && (
-                <p className="text-red-500 text-sm">
-                  {errors.description.message}
-                </p>
-              )}
-              <input
-                {...register("githubUrl")}
+
+              <InputField
+                register={register("githubUrl")}
                 type="text"
-                placeholder="GithubUrl"
-                className="input input-primary w-full rounded-lg"
+                label="GithubUrl"
+                error={errors.githubUrl}
               />
-              {errors.githubUrl && (
-                <p className="text-red-500 text-sm">
-                  {errors.githubUrl.message}
-                </p>
-              )}
-              <input
-                {...register("liveUrl")}
+
+              <InputField
+                register={register("liveUrl")}
                 type="text"
-                placeholder="LiveUrl"
-                className="input input-primary w-full rounded-lg"
+                label="LiveUrl"
+                error={errors.liveUrl}
               />
-              {errors.liveUrl && (
-                <p className="text-red-500 text-sm">{errors.liveUrl.message}</p>
-              )}
-              <input
-                {...register("imageUrl")}
+
+              <InputField
+                register={register("imageUrl")}
                 type="text"
-                placeholder="imageUrl"
-                className="input input-primary w-full rounded-lg"
+                label="imageUrl"
+                error={errors.imageUrl}
               />
-              {errors.imageUrl && (
-                <p className="text-red-500 text-sm">
-                  {errors.imageUrl.message}
-                </p>
-              )}
+
               <div>
                 <button
                   type="submit"
                   className="w-full btn btn-primary rounded-lg"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <TbLoader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Please wait
-                    </>
-                  ) : (
-                    "Add Project"
+                  {isSubmitting && (
+                    <TbLoader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
+                  {!isSubmitting && "Add Project"}
                 </button>
               </div>
             </fieldset>

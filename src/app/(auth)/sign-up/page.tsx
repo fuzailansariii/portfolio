@@ -2,53 +2,45 @@
 import { SignUpModel } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { TbLoader2 } from "react-icons/tb";
 import { useRouter } from "next/navigation";
+import InputField from "@/app/components/InputField";
 
 export default function SignUp() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<z.infer<typeof SignUpModel>>({
     resolver: zodResolver(SignUpModel),
   });
 
   const onSubmit = async (data: z.infer<typeof SignUpModel>) => {
-    // console.log("FormData: ", data);
     try {
-      setIsSubmitting(true);
       const response = await axios.post("/api/auth/sign-up", data);
-      // console.log("Response data: ", response);
-
       if (response.status === 201) {
         toast.success("User Created Successfully");
-        router.push("/sign-in");
         reset();
+        router.push("/sign-in");
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        if (error.response.status === 409) {
-          toast.error("User already exist with this email");
-        } else if (error.response.status === 400) {
-          toast.error("Invalid Inputs");
-        } else {
-          toast.error("Internal server error");
-        }
+        toast.error(
+          error.response.status === 409
+            ? "User already exist with this email"
+            : error.response.status === 400
+            ? "Invalid Inputs"
+            : "Internal server error"
+        );
       } else {
         toast.error("Something went wrong");
       }
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -58,55 +50,44 @@ export default function SignUp() {
         onSubmit={handleSubmit(onSubmit)}
         className="m-4 md:p-20 p-4 flex flex-col gap-5 w-full md:w-1/2 shadow-md rounded-lg"
       >
-        <input
-          {...register("fullName")}
-          type="text"
-          placeholder="Full Name"
-          className="input w-full input-secondary rounded-lg"
-        />
-        {errors.fullName && (
-          <p className="text-red-500 text-sm">{errors.fullName.message}</p>
-        )}
-        <input
-          {...register("email")}
-          type="email"
-          placeholder="Email"
-          className="input w-full input-secondary rounded-lg"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
-        )}
+        <fieldset disabled={isSubmitting} className="space-y-5 px-5">
+          <InputField
+            register={register("fullName")}
+            type="text"
+            label="Full Name"
+            error={errors.fullName}
+          />
+          <InputField
+            type="email"
+            label="Email"
+            register={register("email")}
+            error={errors.email}
+          />
 
-        <input
-          {...register("password")}
-          type="password"
-          placeholder="password"
-          className="input w-full input-secondary rounded-lg"
-        />
-        {errors.password && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
-        )}
-
-        <button
-          type="submit"
-          className="w-full btn btn-primary rounded-lg"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? (
-            <>
+          <InputField
+            type="password"
+            label="Password"
+            register={register("password")}
+            error={errors.password}
+          />
+          <button
+            type="submit"
+            className="w-full btn btn-primary rounded-lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
               <TbLoader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </>
-          ) : (
-            "Sign up"
-          )}
-        </button>
-        <p className="text-center">
-          Already a member{" "}
-          <span className="text-blue-600 underline">
-            <Link href={"/sign-in"}>sign-in</Link>
-          </span>
-        </p>
+            ) : (
+              "Sign up"
+            )}
+          </button>
+          <p className="text-center">
+            Already a member{" "}
+            <span className="text-blue-600 underline">
+              <Link href={"/sign-in"}>sign-in</Link>
+            </span>
+          </p>
+        </fieldset>
       </form>
     </div>
   );
