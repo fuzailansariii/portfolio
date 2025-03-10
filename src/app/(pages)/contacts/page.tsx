@@ -2,7 +2,6 @@
 import InputField from "@/app/components/InputField";
 import { ContactModal } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TbLoader2 } from "react-icons/tb";
 import { toast } from "sonner";
