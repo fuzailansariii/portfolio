@@ -1,47 +1,66 @@
+"use client";
+
 import Projects from "@/app/components/Projects";
-import React from "react";
-// import DevJourney from "@/assets/DevJourney.png";
-// import LinkedInUIClone from "@/assets/LinkedInUIClone.png";
-// import MyKitchenImage from "@/assets/MyKitchenImage.png";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
-const projectData = [
-  {
-    title: "DevJourney",
-    description:
-      "A portfolio site crafted with Next.js and TailwindCSS.A portfolio site crafted with Next.js and TailwindCSS.A portfolio site crafted with Next.js and TailwindCSS.A portfolio site crafted with Next.js and TailwindCSS.",
-    githubLink: "https://github.com/fuzailansariii/dev-journey",
-    liveLink: "https://dev-journey-three.vercel.app",
-    projectImage: "/assets/DevJourney.png",
-  },
-  {
-    title: "LinkedIn UI Clone",
-    description:
-      "A functional clone of the LinkedIn interface with features such as login, signup, posting, and profile management. Built using ReactJS, TailwindCSS, and Firebase",
-    githubLink: "https://github.com/fuzailansariii/linkedin-clone",
-    liveLink: "https://linkedin-clone-beryl-five.vercel.app/",
-    projectImage: "/assets/LinkedInUIClone.png",
-  },
-  {
-    title: "My Kitchen Recipes",
-    description:
-      "Discover a variety of delicious recipes from around the world. Easily search by ingredients or dietary preferences. Perfect for all cooking levels, from beginners to experts",
-    githubLink: "https://github.com/fuzailansariii/MyKitchenRecipes",
-    liveLink: "https://my-kitchen-recipes.vercel.app/",
-    projectImage: "/assets/MyKitchenImage.png",
-  },
-
-  // Add more projects here
-];
+interface Project {
+  title: string;
+  description: string;
+  imageUrl?: string;
+  githubUrl?: string;
+  liveUrl?: string;
+}
 
 export default function ProjectList() {
+  const [project, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    async function fetchProject() {
+      try {
+        const response = await axios.get("/api/projects");
+        console.log("Full API Response:", response.data);
+
+        if (response.data && Array.isArray(response.data.projects)) {
+          const fetchedProject: Project[] = response.data.projects;
+          if (fetchedProject.length > 0) {
+            setProjects(fetchedProject);
+          } else {
+            toast.info("No projects exist");
+          }
+        } else {
+          toast.error("Invalid API response format");
+        }
+      } catch (error) {
+        toast.error("Failed to fetch projects");
+        console.error(error);
+      }
+    }
+    fetchProject();
+  }, []);
+
   return (
     <div className="max-w-screen-xl mx-auto p-5">
       <h1 className="text-4xl my-10 font-bold">Projects</h1>
-
-      {/* Responsive Grid Layout */}
       <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-5">
-        {projectData.map((project, index) => (
-          <Projects key={index} {...project} />
+        {project.map((item, index) => (
+          <Projects
+            key={index}
+            title={item.title}
+            description={item.description}
+            imageUrl={item.imageUrl}
+            githubUrl={
+              item.githubUrl
+                ? { url: item.githubUrl, label: "GitHub" }
+                : undefined
+            }
+            liveUrl={
+              item.liveUrl
+                ? { url: item.liveUrl, label: "Live Demo" }
+                : undefined
+            }
+          />
         ))}
       </div>
     </div>
