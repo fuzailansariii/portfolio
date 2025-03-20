@@ -1,4 +1,5 @@
 "use client";
+
 import { MenuItems } from "@/lib/NavbarData";
 import Link from "next/link";
 import React, { useEffect, useRef } from "react";
@@ -8,33 +9,25 @@ import DashboardNav from "./DashboardNav";
 
 export default function Navbar() {
   const modalRef = useRef<HTMLDialogElement>(null);
-
-  const openModal = () => {
-    modalRef.current?.showModal();
-  };
-
-  const closeModal = () => {
-    if (modalRef.current?.open) {
-      modalRef.current?.close();
-    }
-  };
-
   const pathname = usePathname();
+
+  const openModal = () => modalRef.current?.showModal();
+  const closeModal = () => modalRef.current?.open && modalRef.current.close();
 
   useEffect(() => {
     closeModal();
   }, [pathname]);
 
   return (
-    <div className="navbar flex justify-between items-center z-50 px-5 md:px-10 bg-base-200">
-      {/* Left side menu items */}
-      <div className="navbar-start flex items-center w-auto gap-4">
-        <Link href={"/"}>
+    <nav className="navbar flex justify-between items-center z-50 px-5 md:px-10 bg-base-200">
+      {/* Left Section: Logo & Title */}
+      <div className="navbar-start flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            strokeWidth={1.5}
             stroke="currentColor"
             className="size-8"
           >
@@ -44,32 +37,33 @@ export default function Navbar() {
               d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
             />
           </svg>
+          <span className="text-2xl font-bold">Fuzail</span>
+          <span className="font-thin text-xl">Developer</span>
         </Link>
-        <Link href={"/"} className="text-2xl font-bold flex items-center">
-          Fuzail
-        </Link>
-        <span className="font-thin text-xl"> Developer</span>
       </div>
 
-      {/* Right side menu items */}
-      <div className="hidden lg:flex w-auto gap-2">
+      {/* Middle Section: Menu Items (Desktop) */}
+      <div className="hidden lg:flex items-center gap-4">
         {MenuItems.map((menu, index) => (
-          <ul key={index} className="menu menu-horizontal px-1">
-            <li>
-              <Link href={menu.link}>{menu.title}</Link>
-            </li>
-          </ul>
+          <Link key={index} href={menu.link} className="px-2">
+            {menu.title}
+          </Link>
         ))}
         <DashboardNav />
       </div>
 
-      <div className="navbar-end lg:hidden items-center">
-        <button className="btn btn-ghost" onClick={openModal}>
+      {/* Right Section: Mobile Menu Button */}
+      <div className="navbar-end lg:hidden">
+        <button
+          className="btn btn-ghost"
+          onClick={openModal}
+          aria-label="Open Menu"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            strokeWidth={1.5}
             stroke="currentColor"
             className="size-8"
           >
@@ -82,20 +76,18 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu popup */}
-      <div className="md:hidden">
-        <dialog
-          ref={modalRef}
-          className="modal"
-          onClick={(e) => {
-            if (e.target === modalRef.current) closeModal();
-          }}
-        >
-          <div className="modal-box h-[50%] rounded-2xl bg-base-200">
-            <MobileMenu />
-          </div>
-        </dialog>
-      </div>
-    </div>
+      {/* Mobile Menu Modal */}
+      <dialog
+        ref={modalRef}
+        className="modal md:hidden"
+        onClick={(e) => {
+          if (e.target === modalRef.current) closeModal();
+        }}
+      >
+        <div className="modal-box h-[50%] rounded-2xl bg-base-200">
+          <MobileMenu />
+        </div>
+      </dialog>
+    </nav>
   );
 }
