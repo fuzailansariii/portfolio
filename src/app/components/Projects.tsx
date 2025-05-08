@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -21,7 +20,6 @@ interface ProjectCardProps {
 export default function Projects({
   title,
   description = "No description available.",
-  imageUrl,
   githubUrl,
   liveUrl,
 }: ProjectCardProps) {
@@ -32,9 +30,9 @@ export default function Projects({
       : description;
 
   return (
-    <div className="w-[380px] h-[420px] shadow-md rounded-lg overflow-hidden border-gray-300 flex flex-col">
+    <div className="w-[380px] h-[200px] shadow-md rounded-lg overflow-hidden border-gray-300 flex flex-col">
       {/* Project Image */}
-      <div className="w-full h-[200px] overflow-hidden">
+      {/* <div className="w-full h-[200px] overflow-hidden">
         {imageUrl ? (
           <Image
             height={420}
@@ -48,12 +46,16 @@ export default function Projects({
             <span className="text-gray-500">No Image Available</span>
           </div>
         )}
-      </div>
+      </div> */}
 
       {/* Project Content */}
       <div className="p-4 flex flex-col flex-grow">
-        <h1 className="text-lg font-bold">{title}</h1>
-        <p className="mt-2 text-sm leading-5">{truncatedDescription}</p>
+        <h1 className="text-lg md:text-2xl font-bold font-quicksand">
+          {title}
+        </h1>
+        <p className="mt-2 text-sm leading-5 italic font-nunito">
+          {truncatedDescription}
+        </p>
 
         {/* Buttons */}
         <div className="mt-auto flex gap-3">

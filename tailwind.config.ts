@@ -12,8 +12,13 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        quicksand: "var(--font-quicksand)",
+        nunito: "var(--font-nunito)",
+      },
     },
   },
+
   plugins: [require("daisyui")],
   daisyui: {
     themes: ["business"],

@@ -15,12 +15,15 @@ interface Project {
 
 export default function ProjectList() {
   const [project, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProject() {
       try {
+        setIsLoading(true);
+        // Simulate a delay for loading state
         const response = await axios.get("/api/projects");
-        console.log("Full API Response:", response.data);
+        // console.log("Full API Response:", response.data);
 
         if (response.data && Array.isArray(response.data.projects)) {
           const fetchedProject: Project[] = response.data.projects;
@@ -35,14 +38,21 @@ export default function ProjectList() {
       } catch (error) {
         toast.error("Failed to fetch projects");
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchProject();
   }, []);
 
   return (
-    <div className="max-w-screen-xl mx-auto p-5">
+    <div className="max-w-screen-xl mx-auto p-5 mb-10">
       <h1 className="text-4xl my-10 font-bold">Projects</h1>
+      {isLoading ? (
+        <div className="min-h-[50vh] flex justify-center items-center w-full">
+          <p className="font-quicksand font-semibold text-2xl">Loading...</p>
+        </div>
+      ) : null}
       <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-5">
         {project.map((item, index) => (
           <Projects

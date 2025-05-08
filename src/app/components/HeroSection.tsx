@@ -26,7 +26,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 text-white gap-10">
+    <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 py-12 text-white gap-10 font-quicksand">
       {/* Title, description and skill icons shows on the mobile view and hidden on md screen size */}
       <div className="text-center md:text-left mt-6 md:mt-0 md:hidden">
         <h1 className="text-5xl md:text-6xl font-bold mb-4">

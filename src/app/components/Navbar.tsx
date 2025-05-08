@@ -19,7 +19,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className="navbar flex justify-between items-center z-50 px-5 md:px-10 bg-base-200">
+    <nav className="navbar flex justify-between items-center z-50 px-5 md:px-10 bg-base-200 font-quicksand">
       {/* Left Section: Logo & Title */}
       <div className="navbar-start flex items-center gap-2">
         <Link href="/" className="flex items-center gap-2">

@@ -20,7 +20,9 @@ export default function Contact() {
   const onSubmit = (data: z.infer<typeof ContactModal>) => {
     try {
       console.log("Form Data: ", data);
-      toast.success("Message sent successfully!");
+      toast.success(
+        "You will need to contact us via email. This form is for demonstration only and does not send messages."
+      );
       reset();
     } catch (error) {
       toast.error("Something went wrong. Please try again.");

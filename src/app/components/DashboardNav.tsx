@@ -19,7 +19,7 @@ export default function DashboardNav() {
     : "User";
 
   return (
-    <div className="hidden md:block">
+    <div className="hidden md:block font-quicksand">
       {session ? (
         <div className="flex justify-center items-center gap-5 ml-2">
           <div className="dropdown dropdown-end">
