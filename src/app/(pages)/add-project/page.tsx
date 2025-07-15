@@ -69,13 +69,6 @@ export default function AddProject() {
                 error={errors.liveUrl}
               />
 
-              <InputField
-                register={register("imageUrl")}
-                type="text"
-                label="imageUrl"
-                error={errors.imageUrl}
-              />
-
               <div>
                 <button
                   type="submit"

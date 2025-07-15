@@ -7,22 +7,15 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
 
-    if (projects.length > 0) {
-      return NextResponse.json(
-        {
-          message: "Projects fetched successfully",
-          projects,
-        },
-        { status: 200 }
-      );
-    }
-
     return NextResponse.json(
       {
-        message: "No projects found",
-        projects: [],
+        message:
+          projects.length > 0
+            ? "Projects fetched successfully"
+            : "No projects found",
+        projects,
       },
-      { status: 404 }
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error fetching projects:", error);

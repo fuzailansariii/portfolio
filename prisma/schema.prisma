@@ -22,7 +22,6 @@ model Projects {
   id          String   @id @default(uuid())
   title       String
   description String
-  imageUrl    String?
   githubUrl   String?
   liveUrl     String?
   createdAt   DateTime @default(now())

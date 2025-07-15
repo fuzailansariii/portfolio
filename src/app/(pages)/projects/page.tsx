@@ -21,10 +21,7 @@ export default function ProjectList() {
     async function fetchProject() {
       try {
         setIsLoading(true);
-        // Simulate a delay for loading state
         const response = await axios.get("/api/projects");
-        // console.log("Full API Response:", response.data);
-
         if (response.data && Array.isArray(response.data.projects)) {
           const fetchedProject: Project[] = response.data.projects;
           if (fetchedProject.length > 0) {
@@ -32,8 +29,6 @@ export default function ProjectList() {
           } else {
             toast.info("No projects exist");
           }
-        } else {
-          toast.error("Invalid API response format");
         }
       } catch (error) {
         toast.error("Failed to fetch projects");
@@ -54,6 +49,9 @@ export default function ProjectList() {
         </div>
       ) : null}
       <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-5">
+        {project.length === 0 && !isLoading ? (
+          <p className="text-gray-500 min-h-[30vh]">No projects available.</p>
+        ) : null}
         {project.map((item, index) => (
           <Projects
             key={index}

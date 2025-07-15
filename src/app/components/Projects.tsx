@@ -31,23 +31,6 @@ export default function Projects({
 
   return (
     <div className="w-[380px] h-[200px] shadow-md rounded-lg overflow-hidden border-gray-300 flex flex-col">
-      {/* Project Image */}
-      {/* <div className="w-full h-[200px] overflow-hidden">
-        {imageUrl ? (
-          <Image
-            height={420}
-            width={380}
-            src={imageUrl}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-            <span className="text-gray-500">No Image Available</span>
-          </div>
-        )}
-      </div> */}
-
       {/* Project Content */}
       <div className="p-4 flex flex-col flex-grow">
         <h1 className="text-lg md:text-2xl font-bold font-quicksand">
