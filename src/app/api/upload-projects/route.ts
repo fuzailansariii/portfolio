@@ -5,8 +5,7 @@ import { authOptions } from "@/utils/options";
 
 export async function POST(req: NextRequest) {
   try {
-    const { title, description, imageUrl, githubUrl, liveUrl } =
-      await req.json();
+    const { title, description, githubUrl, liveUrl } = await req.json();
     // check if the user is authenticated or not
     const session = await getServerSession(authOptions);
 
